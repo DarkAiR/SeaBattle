@@ -1,0 +1,21 @@
+div.room_list_item {
+	border: 1px dotted #000;
+	width: 200px;
+	margin-bottom: 5px;
+	background: #f8f8f8;
+}
+
+div.room_list_timestamp {
+}
+
+div.room_list_state {
+}
+
+div.room_list_users ul {
+	padding: 0px;
+	margin: 0px auto;
+	list-style-type: none;
+	color: #444;
+	font-style: italic;
+	text-align: center;
+}
