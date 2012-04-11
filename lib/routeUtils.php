@@ -17,6 +17,7 @@ class RouteUtils
 			'createRoom' => 'roomsPage.php',
 			'enterRoom'  => 'roomsPage.php',
 			'leaveRoom'  => 'roomsPage.php',
+			'getRooms'   => 'roomsPage.php',
 		),
 		'createField' => array(
 			'index'     => 'createFieldPage.php',

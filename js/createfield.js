@@ -18,49 +18,6 @@ $(document).ready( function()
 		}
 		return false;
 	});
-/*	$('#save_field_form input[name="savefield"]').click( function()
-	{
-		if( isSeaBattleMake == false )
-		{
-			console.info( 'Сперва расставьте корабли' );
-			return false;
-		}
-
-		// Сохранение комнаты
-		var form = $('#save_field_form');
-		var fieldData = seaField.serializeField();
-		$.ajax(
-		{
-			url:      'index.php',
-			type:     'post',
-			data:     form.serialize()+'&field='+fieldData+'&isAjax=1',
-			dataType: 'json',
-			success : function(data)
-			{
-			},
-			complete: function(data)
-			{
-				resp = $.parseJSON( data.responseText );
-				if( resp.error != undefined )
-				{
-					$('#error').empty().append( resp.error );
-				}
-				else
-				{
-					// Все отлично, переходим дальше
-					var formRedirect = $('#save_field_redirect');
-					formRedirect.find( '[name="field"]' ).attr( 'value', fieldData );
-					formRedirect.submit();
-				}
-			},
-			error: function(data)
-			{
-				$('#error').html( data );
-			}
-		});
-
-		return false;
-	});*/
 });
 
 
@@ -76,6 +33,7 @@ var createField =
 		var fieldData = seaField.serializeField();
 		return form.serialize()+'&field='+fieldData;
 	},
+
 	success: function( data )
 	{
 		var fieldData = seaField.serializeField();
@@ -83,6 +41,7 @@ var createField =
 		formRedirect.find( '[name="field"]' ).attr( 'value', fieldData );
 		formRedirect.submit();
 	},
+	
 /*	error: function( data )
 	{
 

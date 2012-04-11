@@ -23,7 +23,6 @@ class CreateFieldPage extends BasePage
 		$params = array(
 			'field' => $field,
 		);
-		$res = App::instance()->api( 'saveField', $params );
-		// Т.к. это ajax запрос, то обрабатывать результат не нужно
+		return App::instance()->api( 'saveField', $params );
 	}
 }

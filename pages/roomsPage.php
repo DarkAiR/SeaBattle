@@ -6,18 +6,11 @@ class RoomsPage extends BasePage
 	// Отображение списка комнат
 	public function actionIndex()
 	{
-		$res = App::instance()->api( 'getRooms' );
-		if( $res === false )
-		{
+		if( $this->getRoomsFromServer() === false )
 			$this->_mainPage->assign( 'errors', App::instance()->getApiErrors() );
-		}
 		else
-		{
-			if( $res['rooms'] !== null )
-				$this->sStoreRooms( unserialize( $res['rooms'] ) );
-		}
-
-		$this->showRoomsList();
+			$this->showRoomsList();
+		
 		$this->showField();
 	}
 
@@ -97,6 +90,34 @@ class RoomsPage extends BasePage
 
 		$this->showRoomsList();
 		$this->showField();
+	}
+
+
+	// Получить список комнат (ajax)
+	public function actionGetRooms()
+	{
+		$res = $this->getRoomsFromServer();
+		if( $res === false )
+			throw new GameException( 'GetRooms : Rooms not found' );
+
+		return PlainPhpView::loadBlock( 'rooms/roomListBlock.php', array(
+			'rooms' => $this->sGetRooms()
+		));
+	}
+
+
+	// Получить список комнат с сервера
+	private function getRoomsFromServer()
+	{
+		$res = App::instance()->api( 'getRooms' );
+		if( $res === false )
+			return false;
+
+		if( $res['rooms'] === null )
+			return false;
+
+		$this->sStoreRooms( unserialize( $res['rooms'] ) );
+		return $res['rooms'];
 	}
 
 

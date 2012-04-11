@@ -1,12 +1,14 @@
-<?php
-$err = $this->getVar( 'errors' );
-if( is_array($err) && count($err)>0 )
-	var_dump( $err );
-?>
+<div id='error' class="error">
+	<?php
+	$err = $this->getVar( 'errors' );
+	if( is_array($err) && count($err)>0 )
+		var_dump( $err );
+	?>
+</div>
 
 <?php
 $user = App::instance()->getUser();
-$this->loadBlock( 'login/logoutBlock.php', array(
+echo PlainPhpView::loadBlock( 'login/logoutBlock.php', array(
 	'userName' => $user->getLogin(),
 ));
 ?>

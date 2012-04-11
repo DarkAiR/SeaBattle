@@ -17,7 +17,7 @@ class BasePage
 	public function show()
 	{
 		$methodName = 'action'.ucfirst($this->_action);
-		call_user_func( array($this, $methodName) );
+		return call_user_func( array($this, $methodName) );
 	}
 }
 ?>

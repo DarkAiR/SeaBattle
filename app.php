@@ -158,25 +158,25 @@ class App
 				case 'mainPage':
 					require 'pages/mainPage.php';
 					$pageObj = new MainPage( $mainPage, $page, $action );
-					$pageObj->show();
+					$pageRes = $pageObj->show();
 					break;
 
 				case 'registration':
 					require 'pages/registrationPage.php';
 					$pageObj = new RegistrationPage( $mainPage, $page, $action );
-					$pageObj->show();
+					$pageRes = $pageObj->show();
 					break;
 
 				case 'createField':
 					require 'pages/createFieldPage.php';
 					$pageObj = new CreateFieldPage( $mainPage, $page, $action );
-					$pageObj->show();
+					$pageRes = $pageObj->show();
 					break;
 
 				case 'rooms':
 					require 'pages/roomsPage.php';
 					$pageObj = new RoomsPage( $mainPage, $page, $action );
-					$pageObj->show();
+					$pageRes = $pageObj->show();
 					break;
 			}
 
@@ -189,21 +189,20 @@ class App
 			// Если вызвали ajax-запросом, то формируем правильный JSON
 			$isAjax = HttpUtils::getPost('isAjax', false);
 			if( $isAjax )
-				ob_clean();
+			{
+				$res = array(
+					'data' => $pageRes,
+				);
+				// Очищаем буфер обмена
+				ob_end_clean();
+				echo json_encode($res);
+				exit();	// Выходим, иначе будет не валидный JSON в ответе
+			}
 
 			print $mainPage->fetch( $pageName );
 			//var_dump( $_POST );
 			var_dump( $page );
 			var_dump( $action );
-
-			if( $isAjax )
-			{
-				$res = array(
-					'data' => ob_get_clean(),
-				);
-				echo json_encode($res);
-				exit();	// Выходим, иначе будет не валидный JSON в ответе
-			}
 		}
 		catch( Exception $e )
 		{

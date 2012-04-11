@@ -21,23 +21,30 @@ require_once 'lib/gameException.php';
 require_once 'config/mainConfig-home.php';
 require_once 'app.php';
 
+//var_dump( $_POST );
+//	die( 'qweqwe');
 // Если передаем в ajax-запросе, то ставим обработчики ошибок и возвращаем валидный JSON
 $isAjax = HttpUtils::getPost('isAjax', false);
 if( $isAjax == true )
 {
+	// Включаем буферизацию вывода
+	ob_start();
+
 	function handleException( $exception )
 	{
 		restore_exception_handler();
 		$res = array(
 			'error' => $exception->getMessage(),
 		);
+		// Очищаем буфер обмена
+		ob_end_clean();
 		echo json_encode($res);
 		exit();	// Выходим, иначе будет не валидный JSON в ответе
 	}
 	function handleError( $code, $message, $file, $line )
 	{
 		restore_error_handler();
-		ob_start();
+		ob_clean();
 		trigger_error( $message );
 		$res = array(
 			'error' => ob_get_clean(),
@@ -47,9 +54,6 @@ if( $isAjax == true )
 	}
 	set_exception_handler( 'handleException' );
 	set_error_handler( 'handleError', error_reporting() );
-
-	// Включаем буферизацию вывода
-	ob_start();
 }
 
 $app = App::instance();

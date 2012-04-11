@@ -29,12 +29,12 @@ class PlainPhpView
 		return isset($this->_vars[$var]) ? $this->_vars[$var] : false;
 	}
 
-	public function loadBlock( $name, $params=array() )
+	public static function loadBlock( $name, $params=array() )
 	{
 		$block = new PlainPhpView();
 		foreach( $params as $key=>$val )
 			$block->assign( $key, $val );
-		echo $block->fetch( $name );
+		return $block->fetch( $name );
 	}
 
 	public function addScript( $name )

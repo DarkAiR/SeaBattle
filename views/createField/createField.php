@@ -5,19 +5,16 @@
 	$this->addScript('createfield.js');
 ?>
 
-<div id='error' class="error"></div>
-
 <?php
-	$this->loadBlock( 'createField/field.php', array(
+	echo PlainPhpView::loadBlock( 'createField/field.php', array(
 	));
 ?>
 
 <div id='create_field_controls'>
 	<input id='make_field' type="button" value="Расставить" />
 	
-	<form id='save_field_form' method="post">
+	<form method="post">
 		<input type="hidden" name="route" value="<?= RouteUtils::makeRoute('createField', 'saveField') ?>" />
-		<!--input type="button" name="savefield" value="Сохранить" /-->
 		<?php Form::createAjaxSubmit( 'Сохранить', '', 'createField.dataPrepare', 'createField.success' ); ?>
 	</form>
 
