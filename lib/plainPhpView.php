@@ -46,12 +46,4 @@ class PlainPhpView
 	{
 		App::instance()->addCss( $name );
 	}
-
-	/**
-	 * Создание AJAX-запроса
-	 */
-	public function createAjaxSubmit( $onDataPreparation=null, $onSuccess=null, $onError=null )
-	{
-
-	}
 }

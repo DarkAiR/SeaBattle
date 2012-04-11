@@ -18,7 +18,7 @@ $(document).ready( function()
 		}
 		return false;
 	});
-	$('#save_field_form input[name="savefield"]').click( function()
+/*	$('#save_field_form input[name="savefield"]').click( function()
 	{
 		if( isSeaBattleMake == false )
 		{
@@ -37,9 +37,6 @@ $(document).ready( function()
 			dataType: 'json',
 			success : function(data)
 			{
-/*				if (data != null && typeof data == 'object') {
-					successCallback(data);
-				}*/
 			},
 			complete: function(data)
 			{
@@ -63,9 +60,34 @@ $(document).ready( function()
 		});
 
 		return false;
-	});
+	});*/
 });
 
+
+var createField = 
+{
+	dataPrepare: function( form )
+	{
+		if( isSeaBattleMake == false )
+		{
+			console.info( 'Сперва расставьте корабли' );
+			return false;
+		}
+		var fieldData = seaField.serializeField();
+		return form.serialize()+'&field='+fieldData;
+	},
+	success: function( data )
+	{
+		var fieldData = seaField.serializeField();
+		var formRedirect = $('#save_field_redirect');
+		formRedirect.find( '[name="field"]' ).attr( 'value', fieldData );
+		formRedirect.submit();
+	},
+/*	error: function( data )
+	{
+
+	}*/
+};
 
 var seaField =
 {

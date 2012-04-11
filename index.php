@@ -13,6 +13,7 @@ Propel::init("seabattle/build/conf/seabattle-conf.php");
 set_include_path("seabattle/build/classes" . PATH_SEPARATOR . get_include_path());
 
 require_once 'lib/plainPhpView.php';
+require_once 'lib/form.php';
 require_once 'lib/routeUtils.php';
 require_once 'lib/httpUtils.php';
 require_once 'lib/gameException.php';

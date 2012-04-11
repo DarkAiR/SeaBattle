@@ -16,8 +16,9 @@
 	<input id='make_field' type="button" value="Расставить" />
 	
 	<form id='save_field_form' method="post">
-		<input type="button" name="savefield" value="Сохранить" />
 		<input type="hidden" name="route" value="<?= RouteUtils::makeRoute('createField', 'saveField') ?>" />
+		<!--input type="button" name="savefield" value="Сохранить" /-->
+		<?php Form::createAjaxSubmit( 'Сохранить', '', 'createField.dataPrepare', 'createField.success' ); ?>
 	</form>
 
 	<form id='save_field_redirect' method="post">
